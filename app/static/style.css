@@ -1,0 +1,320 @@
+/* ===== CSS Variables ===== */
+:root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #1a1d27;
+  --bg-card: #22262f;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --text-muted: #5f6368;
+  --border-color: #2e3440;
+  --accent: #5b9bd5;
+
+  --status-ok: #34d399;
+  --status-warn: #fbbf24;
+  --status-critical: #f87171;
+
+  --bar-bg: #2e3440;
+  --bar-ok: #34d399;
+  --bar-warn: #fbbf24;
+  --bar-critical: #f87171;
+
+  --card-radius: 12px;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --transition-speed: 0.3s;
+}
+
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Header ===== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.connection-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-speed) ease;
+}
+
+.connection-indicator .status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background var(--transition-speed) ease;
+}
+
+.connection-indicator.connected .status-dot {
+  background: var(--status-ok);
+  box-shadow: 0 0 6px var(--status-ok);
+}
+
+.connection-indicator.disconnected .status-dot {
+  background: var(--status-critical);
+  box-shadow: 0 0 6px var(--status-critical);
+}
+
+.connection-indicator.disconnected {
+  color: var(--status-critical);
+}
+
+/* ===== Main Content ===== */
+main {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== Status Banner ===== */
+.status-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--card-radius);
+  margin-bottom: 1.5rem;
+  transition: background var(--transition-speed) ease,
+              border-color var(--transition-speed) ease;
+  border: 1px solid transparent;
+}
+
+.status-banner.status-ok {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+.status-banner.status-warn {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+.status-banner.status-critical {
+  background: rgba(248, 113, 113, 0.08);
+  border-color: rgba(248, 113, 113, 0.25);
+}
+
+.status-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.status-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.status-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.status-banner.status-ok .status-value {
+  color: var(--status-ok);
+}
+
+.status-banner.status-warn .status-value {
+  color: var(--status-warn);
+}
+
+.status-banner.status-critical .status-value {
+  color: var(--status-critical);
+}
+
+.model-info {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* ===== Metrics Grid ===== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+/* ===== Metric Card ===== */
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  padding: 1.25rem;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.metric-icon {
+  font-size: 1.1rem;
+}
+
+.metric-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  transition: color var(--transition-speed) ease;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ===== Battery Bar ===== */
+.battery-bar-track,
+.load-bar-track {
+  height: 8px;
+  background: var(--bar-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.battery-bar-fill,
+.load-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--bar-ok);
+  transition: width 0.6s ease, background var(--transition-speed) ease;
+}
+
+.battery-bar-fill.warn,
+.load-bar-fill.warn {
+  background: var(--bar-warn);
+}
+
+.battery-bar-fill.critical,
+.load-bar-fill.critical {
+  background: var(--bar-critical);
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+}
+
+footer strong {
+  color: var(--text-secondary);
+}
+
+/* ===== Loading Pulse ===== */
+.loading .metric-value {
+  animation: pulse 1.5s ease-in-out infinite;
+  color: var(--text-muted);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .status-banner {
+    flex-wrap: wrap;
+  }
+
+  .model-info {
+    margin-left: 0;
+    flex-basis: 100%;
+    text-align: left;
+    margin-top: 0.25rem;
+  }
+
+  .metric-value {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

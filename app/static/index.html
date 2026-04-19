@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔋 UPS Monitor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🔋 UPS Monitor</h1>
+    <div id="connection-status" class="connection-indicator connected" aria-live="polite">
+      <span class="status-dot"></span>
+      <span id="connection-text">Connected</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Status Banner -->
+    <section id="status-banner" class="status-banner status-ok" aria-label="UPS Status">
+      <div class="status-icon" id="status-icon">⚡</div>
+      <div class="status-info">
+        <span class="status-label">UPS Status</span>
+        <span class="status-value" id="status-text">Loading…</span>
+      </div>
+      <div class="model-info" id="ups-model">—</div>
+    </section>
+
+    <!-- Metric Cards Grid -->
+    <section class="metrics-grid" aria-label="UPS Metrics">
+
+      <!-- Battery Charge -->
+      <article class="metric-card" id="card-battery">
+        <div class="metric-header">
+          <span class="metric-icon">🔋</span>
+          <span class="metric-title">Battery Charge</span>
+        </div>
+        <div class="metric-value" id="battery-value">—</div>
+        <div class="battery-bar-track">
+          <div class="battery-bar-fill" id="battery-bar" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </article>
+
+      <!-- Runtime -->
+      <article class="metric-card" id="card-runtime">
+        <div class="metric-header">
+          <span class="metric-icon">⏱️</span>
+          <span class="metric-title">Runtime Remaining</span>
+        </div>
+        <div class="metric-value" id="runtime-value">—</div>
+        <div class="metric-sub" id="runtime-seconds">—</div>
+      </article>
+
+      <!-- Input Voltage -->
+      <article class="metric-card" id="card-input-voltage">
+        <div class="metric-header">
+          <span class="metric-icon">🔌</span>
+          <span class="metric-title">Input Voltage</span>
+        </div>
+        <div class="metric-value" id="input-voltage-value">—</div>
+        <div class="metric-sub">VAC</div>
+      </article>
+
+      <!-- Output Voltage -->
+      <article class="metric-card" id="card-output-voltage">
+        <div class="metric-header">
+          <span class="metric-icon">⚡</span>
+          <span class="metric-title">Output Voltage</span>
+        </div>
+        <div class="metric-value" id="output-voltage-value">—</div>
+        <div class="metric-sub">VAC</div>
+      </article>
+
+      <!-- Load -->
+      <article class="metric-card" id="card-load">
+        <div class="metric-header">
+          <span class="metric-icon">📊</span>
+          <span class="metric-title">UPS Load</span>
+        </div>
+        <div class="metric-value" id="load-value">—</div>
+        <div class="load-bar-track">
+          <div class="load-bar-fill" id="load-bar" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </article>
+
+      <!-- Last Updated -->
+      <article class="metric-card" id="card-updated">
+        <div class="metric-header">
+          <span class="metric-icon">🕐</span>
+          <span class="metric-title">Last Updated</span>
+        </div>
+        <div class="metric-value" id="last-updated-value">—</div>
+        <div class="metric-sub" id="last-updated-ago">waiting for data…</div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>Powered by <strong>NUT</strong> on <strong>Raspberry Pi</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

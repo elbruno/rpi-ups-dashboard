@@ -1,0 +1,7 @@
+# /etc/nut/upsd.users — NUT access control
+# This user is used by upsmon on the same machine.
+# For production, change the password and restrict access further.
+
+[admin]
+    password = admin
+    upsmon master

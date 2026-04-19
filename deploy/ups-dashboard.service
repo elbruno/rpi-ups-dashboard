@@ -1,0 +1,33 @@
+[Unit]
+Description=Raspberry Pi UPS Dashboard (Flask)
+Documentation=https://github.com/elbruno/rpi-ups-dashboard
+After=network.target nut-server.service
+Wants=nut-server.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/rpi-ups-dashboard
+ExecStart=/usr/bin/python3 -m app.main
+Restart=on-failure
+RestartSec=5
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+# Harden the service
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/rpi-ups-dashboard
+ProtectHome=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ups-dashboard
+
+# Environment
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
