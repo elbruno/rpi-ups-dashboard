@@ -24,11 +24,18 @@ upsc ups@localhost
 
 ## 🧠 API
 GET /api/ups
+GET /api/ups/history?limit=120
 
 ## 🚀 Roadmap
 Fase 1: MVP
-Fase 2: mejoras (gráficos, historial)
+Fase 2: mejoras (gráficos, historial) ✅
 Fase 3: alertas y automatización
+
+## 📈 Fase 2 implementada
+- Logging persistente en JSONL (`data/ups_history.jsonl`)
+- Endpoint de historial para frontend: `GET /api/ups/history`
+- Gráfico histórico en dashboard (batería % y carga %)
+- Retención configurable con `UPS_HISTORY_MAX_ENTRIES`
 
 ## 🧱 Ejemplo Python
 import subprocess
