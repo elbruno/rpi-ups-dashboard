@@ -164,3 +164,59 @@ class TestStaticServing:
     def test_root_returns_200(self):
         response = self.client.get("/")
         assert response.status_code == 200
+
+
+# ===================================================================
+# GET /api/ups/history — history endpoint
+# ===================================================================
+
+
+class TestApiUpsHistory:
+    """Verify GET /api/ups/history returns bounded history data."""
+
+    @pytest.fixture(autouse=True)
+    def setup_client(self, client):
+        self.client = client
+
+    @patch("app.main.history_store.get_recent")
+    def test_returns_200(self, mock_get_recent):
+        mock_get_recent.return_value = [
+            {"timestamp": "2026-04-19T12:00:00", "battery.charge": "100", "ups.load": "20"}
+        ]
+
+        response = self.client.get("/api/ups/history")
+        assert response.status_code == 200
+
+    @patch("app.main.history_store.get_recent")
+    def test_returns_payload_with_samples(self, mock_get_recent):
+        mock_get_recent.return_value = [
+            {"timestamp": "2026-04-19T12:00:00", "battery.charge": "100", "ups.load": "20"}
+        ]
+
+        response = self.client.get("/api/ups/history")
+        data = json.loads(response.data)
+        assert "samples" in data
+        assert "count" in data
+        assert "limit" in data
+        assert isinstance(data["samples"], list)
+
+    @patch("app.main.history_store.get_recent")
+    def test_uses_default_limit_when_missing(self, mock_get_recent):
+        mock_get_recent.return_value = []
+
+        self.client.get("/api/ups/history")
+        mock_get_recent.assert_called_once_with(120)
+
+    @patch("app.main.history_store.get_recent")
+    def test_limit_query_param_is_used(self, mock_get_recent):
+        mock_get_recent.return_value = []
+
+        self.client.get("/api/ups/history?limit=60")
+        mock_get_recent.assert_called_once_with(60)
+
+    @patch("app.main.history_store.get_recent")
+    def test_invalid_limit_falls_back_to_default(self, mock_get_recent):
+        mock_get_recent.return_value = []
+
+        self.client.get("/api/ups/history?limit=abc")
+        mock_get_recent.assert_called_once_with(120)

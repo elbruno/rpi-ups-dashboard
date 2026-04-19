@@ -26,6 +26,8 @@ Real-time web dashboard to monitor a CyberPower UPS connected to a Raspberry Pi 
 - **Real-time monitoring** — Battery %, voltage, load, runtime, UPS status
 - **Auto-refresh** — Dashboard updates every 5 seconds
 - **Status indicators** — Color-coded status (🟢 Online, 🟡 On Battery, 🔴 Low Battery)
+- **Historical trends (Phase 2)** — Battery % and UPS load charts over time
+- **Persistent telemetry logging (Phase 2)** — Lightweight JSONL history storage
 - **Lightweight** — Vanilla HTML/CSS/JS frontend, Flask backend
 - **Raspberry Pi optimized** — Minimal resource footprint
 - **Easy deployment** — One-script install with systemd auto-start
@@ -211,6 +213,33 @@ Returns current UPS status as JSON.
 | `OL CHRG` | Online, Charging | 🟢 Green |
 | `OB DISCHRG` | On Battery, Discharging | 🟡 Yellow |
 
+### `GET /api/ups/history?limit=120`
+
+Returns recent UPS history samples (oldest → newest) for charting.
+
+**Response:**
+```json
+{
+    "samples": [
+        {
+            "timestamp": "2026-04-19T15:30:00Z",
+            "battery.charge": "100",
+            "ups.load": "25",
+            "ups.status": "OL"
+        }
+    ],
+    "count": 1,
+    "limit": 120
+}
+```
+
+## ⚙️ History Storage Configuration
+
+- `UPS_HISTORY_FILE` — optional path to history JSONL file (default: `data/ups_history.jsonl`)
+- `UPS_HISTORY_MAX_ENTRIES` — max retained samples (default: `5000`)
+
+See detailed plan: [`docs/phase-2-plan.md`](docs/phase-2-plan.md)
+
 ## 🧪 Running Tests
 
 ```bash
@@ -280,7 +309,7 @@ rpi-ups-dashboard/
 ## 🗺️ Roadmap
 
 - [x] **Phase 1 — MVP:** Real-time status display, single API endpoint, auto-refresh
-- [ ] **Phase 2 — Enhancements:** Historical charts (battery over time), data logging
+- [x] **Phase 2 — Enhancements:** Historical charts (battery over time), data logging
 - [ ] **Phase 3 — Automation:** Alerts (email/webhook on battery), auto-shutdown scripts
 
 ## 🤝 Contributing

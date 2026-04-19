@@ -135,6 +135,22 @@
     <!-- Status Flags -->
     <section class="status-flags" aria-label="Status Flags" id="status-flags"></section>
 
+    <!-- Historical Trends -->
+    <section class="history-panel" aria-label="Historical Trends">
+      <div class="history-header">
+        <h2>Historical Trends</h2>
+        <p id="history-meta">Last 120 samples · 5s interval</p>
+      </div>
+      <div class="history-chart-wrap">
+        <canvas id="history-chart" width="900" height="300" aria-label="Battery and load history chart"></canvas>
+        <div id="history-empty" class="history-empty">Collecting history samples…</div>
+      </div>
+      <div class="history-legend">
+        <span><i class="legend-swatch legend-battery"></i> Battery %</span>
+        <span><i class="legend-swatch legend-load"></i> UPS Load %</span>
+      </div>
+    </section>
+
     <!-- Advanced Diagnostics -->
     <details class="advanced-panel" id="advanced-panel">
       <summary>Advanced Diagnostics</summary>
