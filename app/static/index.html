@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🔋 UPS Monitor</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <h1>🔋 UPS Monitor</h1>
@@ -22,6 +24,7 @@
       <div class="status-info">
         <span class="status-label">UPS Status</span>
         <span class="status-value" id="status-text">Loading…</span>
+        <span class="status-detail" id="status-detail"></span>
       </div>
       <div class="model-info" id="ups-model">—</div>
     </section>
@@ -37,7 +40,8 @@
         </div>
         <div class="metric-value" id="battery-value">—</div>
         <div class="battery-bar-track">
-          <div class="battery-bar-fill" id="battery-bar" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="battery-bar-fill" id="battery-bar" style="width: 0%" role="progressbar" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </article>
 
@@ -79,7 +83,8 @@
         </div>
         <div class="metric-value" id="load-value">—</div>
         <div class="load-bar-track">
-          <div class="load-bar-fill" id="load-bar" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="load-bar-fill" id="load-bar" style="width: 0%" role="progressbar" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </article>
 
@@ -102,4 +107,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

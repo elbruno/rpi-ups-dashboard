@@ -1,0 +1,3 @@
+# Ensure CyberPower UPS USB devices are readable by NUT driver user
+# Added by rpi-ups-dashboard installer as a distro-safe fallback.
+ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="0764", MODE="0660", GROUP="nut"

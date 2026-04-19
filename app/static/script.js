@@ -15,6 +15,7 @@
     statusBanner: document.getElementById("status-banner"),
     statusIcon: document.getElementById("status-icon"),
     statusText: document.getElementById("status-text"),
+    statusDetail: document.getElementById("status-detail"),
     upsModel: document.getElementById("ups-model"),
     batteryValue: document.getElementById("battery-value"),
     batteryBar: document.getElementById("battery-bar"),
@@ -121,6 +122,7 @@
     dom.statusBanner.className = "status-banner status-" + status.level;
     dom.statusIcon.textContent = status.icon;
     dom.statusText.textContent = status.label;
+    dom.statusDetail.textContent = "";
     dom.upsModel.textContent = data["ups.model"] || "—";
 
     // Battery charge
@@ -169,12 +171,47 @@
     updateAgo();
   }
 
+  function renderError(errorMessage, payload) {
+    var message = errorMessage || "Unable to fetch UPS data";
+    var ts = payload && payload.timestamp ? new Date(payload.timestamp) : new Date();
+
+    dom.statusBanner.className = "status-banner status-critical";
+    dom.statusIcon.textContent = "🚨";
+    dom.statusText.textContent = "UPS data unavailable";
+    dom.statusDetail.textContent = message;
+    dom.upsModel.textContent = "Check NUT driver / USB connection";
+
+    dom.batteryValue.textContent = "—";
+    dom.runtimeValue.textContent = "—";
+    dom.runtimeSeconds.textContent = "No telemetry yet";
+    dom.inputVoltage.textContent = "—";
+    dom.outputVoltage.textContent = "—";
+    dom.loadValue.textContent = "—";
+
+    dom.batteryBar.style.width = "0%";
+    dom.batteryBar.setAttribute("aria-valuenow", "0");
+    dom.batteryBar.className = "battery-bar-fill critical";
+
+    dom.loadBar.style.width = "0%";
+    dom.loadBar.setAttribute("aria-valuenow", "0");
+    dom.loadBar.className = "load-bar-fill";
+
+    dom.lastUpdatedValue.textContent = ts.toLocaleTimeString();
+    dom.lastUpdatedAgo.textContent = "waiting for healthy UPS telemetry";
+  }
+
   // ── Fetch cycle ──────────────────────────────────────────────
   function fetchData() {
     fetch(API_URL)
       .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
+        return res.json().then(function (data) {
+          if (!res.ok) {
+            var err = new Error("HTTP " + res.status);
+            err.payload = data;
+            throw err;
+          }
+          return data;
+        });
       })
       .then(function (data) {
         if (isFirstLoad) {
@@ -185,8 +222,16 @@
         setConnected(true);
         render(data);
       })
-      .catch(function () {
+      .catch(function (err) {
+        if (isFirstLoad) {
+          hideLoading();
+          isFirstLoad = false;
+          startAgoCounter();
+        }
         setConnected(false);
+        var payload = err && err.payload ? err.payload : null;
+        var message = payload && payload.error ? payload.error : "Cannot reach /api/ups";
+        renderError(message, payload);
       });
   }
 

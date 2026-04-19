@@ -114,7 +114,7 @@ main {
   border-radius: var(--card-radius);
   margin-bottom: 1.5rem;
   transition: background var(--transition-speed) ease,
-              border-color var(--transition-speed) ease;
+    border-color var(--transition-speed) ease;
   border: 1px solid transparent;
 }
 
@@ -154,6 +154,13 @@ main {
 .status-value {
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+.status-detail {
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  max-width: 60ch;
 }
 
 .status-banner.status-ok .status-value {
@@ -277,8 +284,15 @@ footer strong {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
 
 /* ===== Responsive ===== */

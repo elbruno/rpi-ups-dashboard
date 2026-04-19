@@ -206,6 +206,35 @@ pytest tests/ -v
 
 Tests use mock NUT data and don't require a physical UPS.
 
+## 🛠️ Troubleshooting
+
+### Installer fails during `apt update` (third-party repo signature error)
+
+If installation fails with a message similar to:
+
+`The repository 'https://downloads.plex.tv/repo/deb ... InRelease' is not signed`
+
+that usually means an unrelated third-party APT repo on your Pi is broken.
+
+The installer now retries automatically by temporarily disabling failing third-party repo entries, completes package installation, and restores those entries at the end.
+
+### Dashboard loads but shows no UPS data
+
+If the dashboard appears but metrics are empty and `/api/ups` returns `503`, NUT likely cannot talk to the UPS yet (for example: `Driver not connected`).
+
+Check the basics:
+
+- UPS is connected via USB and powered on
+- NUT services are running:
+    - `sudo systemctl status nut-server`
+    - `sudo systemctl status nut-driver-enumerator` (or `nut-driver` on some distros)
+- Direct NUT query works:
+    - `upsc ups@localhost`
+
+If logs mention `insufficient permissions on everything`, the USB device node permissions are too strict for the `nut` user. The installer now deploys a local udev rule (`/etc/udev/rules.d/99-ups-dashboard-nut-usb.rules`) for CyberPower devices and reloads udev rules automatically.
+
+The UI now surfaces this backend error directly in the status banner so you can diagnose faster.
+
 ## 📁 Project Structure
 
 ```
