@@ -99,6 +99,60 @@
       </article>
 
     </section>
+
+    <!-- Computed Insights -->
+    <section class="insights-grid" aria-label="Computed Insights">
+      <article class="metric-card">
+        <div class="metric-header">
+          <span class="metric-icon">⚙️</span>
+          <span class="metric-title">Estimated Power Draw</span>
+        </div>
+        <div class="metric-value" id="estimated-power-value">—</div>
+        <div class="metric-sub" id="estimated-power-sub">waiting for data…</div>
+      </article>
+
+      <article class="metric-card">
+        <div class="metric-header">
+          <span class="metric-icon">🩺</span>
+          <span class="metric-title">Runtime Health</span>
+        </div>
+        <div class="health-row">
+          <span id="runtime-health-badge" class="health-badge health-unknown">Unknown</span>
+        </div>
+        <div class="metric-sub" id="time-to-low-value">time to low: —</div>
+      </article>
+
+      <article class="metric-card">
+        <div class="metric-header">
+          <span class="metric-icon">🔋</span>
+          <span class="metric-title">Battery Voltage</span>
+        </div>
+        <div class="metric-value" id="battery-voltage-value">—</div>
+        <div class="metric-sub">VDC</div>
+      </article>
+    </section>
+
+    <!-- Status Flags -->
+    <section class="status-flags" aria-label="Status Flags" id="status-flags"></section>
+
+    <!-- Advanced Diagnostics -->
+    <details class="advanced-panel" id="advanced-panel">
+      <summary>Advanced Diagnostics</summary>
+      <div class="advanced-grid">
+        <div class="kv-item"><span class="kv-key">Manufacturer</span><span class="kv-value" id="diag-mfr">—</span></div>
+        <div class="kv-item"><span class="kv-key">Serial</span><span class="kv-value" id="diag-serial">—</span></div>
+        <div class="kv-item"><span class="kv-key">Battery Type</span><span class="kv-value"
+            id="diag-battery-type">—</span></div>
+        <div class="kv-item"><span class="kv-key">Beeper</span><span class="kv-value" id="diag-beeper">—</span></div>
+        <div class="kv-item"><span class="kv-key">Driver</span><span class="kv-value" id="diag-driver">—</span></div>
+        <div class="kv-item"><span class="kv-key">Driver State</span><span class="kv-value"
+            id="diag-driver-state">—</span></div>
+        <div class="kv-item"><span class="kv-key">Input Nominal</span><span class="kv-value"
+            id="diag-input-nominal">—</span></div>
+        <div class="kv-item"><span class="kv-key">Nominal Power</span><span class="kv-value"
+            id="diag-power-nominal">—</span></div>
+      </div>
+    </details>
   </main>
 
   <footer>
