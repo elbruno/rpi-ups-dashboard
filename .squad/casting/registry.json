@@ -1,0 +1,44 @@
+{
+  "agents": {
+    "watney": {
+      "persistent_name": "Watney",
+      "universe": "The Martian",
+      "role": "Lead / Architect",
+      "created_at": "2026-04-19T15:37:00Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "martinez": {
+      "persistent_name": "Martinez",
+      "universe": "The Martian",
+      "role": "Backend Dev",
+      "created_at": "2026-04-19T15:37:00Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "johanssen": {
+      "persistent_name": "Johanssen",
+      "universe": "The Martian",
+      "role": "Frontend Dev",
+      "created_at": "2026-04-19T15:37:00Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "beck": {
+      "persistent_name": "Beck",
+      "universe": "The Martian",
+      "role": "DevOps Engineer",
+      "created_at": "2026-04-19T15:37:00Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "lewis": {
+      "persistent_name": "Lewis",
+      "universe": "The Martian",
+      "role": "Tester / QA",
+      "created_at": "2026-04-19T15:37:00Z",
+      "legacy_named": false,
+      "status": "active"
+    }
+  }
+}
