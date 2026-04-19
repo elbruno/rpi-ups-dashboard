@@ -7,6 +7,20 @@ Real-time web dashboard to monitor a CyberPower UPS connected to a Raspberry Pi 
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-Compatible-c51a4a?logo=raspberrypi)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+## 🖼️ Dashboard Screenshots
+
+### Desktop View
+
+![UPS Dashboard - Desktop](docs/images/dashboard-desktop.jpg)
+
+### Mobile View
+
+![UPS Dashboard - Mobile](docs/images/dashboard-mobile.jpg)
+
+### Status Banner Detail
+
+![UPS Dashboard - Status Banner](docs/images/dashboard-status-banner.jpg)
+
 ## 📊 Features
 
 - **Real-time monitoring** — Battery %, voltage, load, runtime, UPS status
